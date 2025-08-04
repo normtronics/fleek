@@ -1,29 +1,48 @@
 import TimerCard from './TimerCard';
 import CreateTimerButton from './CreateTimerButton';
+import { useTimer } from '../hooks/useTimer';
+import { getTimers } from '../utils/storage';
 import type TimerData from '../interfaces/TimerData';
-import type { ActiveTimer } from '../context/TimerContext';
 
 interface TimerListProps {
   savedTimers: TimerData[];
-  activeTimers: ActiveTimer[];
-  onStartTimer: (timer: TimerData) => void;
-  onStopTimer: (timerId: string) => void;
-  onPauseTimer: (timerId: string) => void;
-  onResumeTimer: (timerId: string) => void;
+  onTimersUpdate: () => void;
 }
 
 export default function TimerList({
   savedTimers,
-  activeTimers,
-  onStartTimer,
-  onStopTimer,
-  onPauseTimer,
-  onResumeTimer,
+  onTimersUpdate,
 }: TimerListProps) {
+  const { 
+    activeTimers, 
+    startTimer, 
+    stopTimer, 
+    pauseTimer, 
+    resumeTimer 
+  } = useTimer();
+
   // Group timers: active first, then saved
   const activeTimerIds = new Set(activeTimers.map(t => t.id));
   const inactiveTimers = savedTimers.filter(timer => !activeTimerIds.has(timer.id));
   const timerCount = savedTimers.length;
+
+  const handleStartTimer = (timer: TimerData) => {
+    startTimer(timer);
+  };
+
+  const handleStopTimer = (timerId: string) => {
+    stopTimer(timerId);
+    // Refresh saved timers to reflect any changes
+    onTimersUpdate();
+  };
+
+  const handlePauseTimer = (timerId: string) => {
+    pauseTimer(timerId);
+  };
+
+  const handleResumeTimer = (timerId: string) => {
+    resumeTimer(timerId);
+  };
 
   return (
     <div className="space-y-3">
@@ -45,10 +64,10 @@ export default function TimerList({
               timer={activeTimer.timerData}
               isActive={true}
               activeElapsedTime={activeTimer.elapsedTime}
-              onStart={() => onStartTimer(activeTimer.timerData)}
-              onStop={() => onStopTimer(activeTimer.id)}
-              onPause={() => onPauseTimer(activeTimer.id)}
-              onResume={() => onResumeTimer(activeTimer.id)}
+              onStart={() => handleStartTimer(activeTimer.timerData)}
+              onStop={() => handleStopTimer(activeTimer.id)}
+              onPause={() => handlePauseTimer(activeTimer.id)}
+              onResume={() => handleResumeTimer(activeTimer.id)}
             />
           ))}
 
@@ -58,10 +77,10 @@ export default function TimerList({
               key={timer.id}
               timer={timer}
               isActive={false}
-              onStart={() => onStartTimer(timer)}
-              onStop={() => onStopTimer(timer.id)}
-              onPause={() => onPauseTimer(timer.id)}
-              onResume={() => onResumeTimer(timer.id)}
+              onStart={() => handleStartTimer(timer)}
+              onStop={() => handleStopTimer(timer.id)}
+              onPause={() => handlePauseTimer(timer.id)}
+              onResume={() => handleResumeTimer(timer.id)}
             />
           ))}
         </>

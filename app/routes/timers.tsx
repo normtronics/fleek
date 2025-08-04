@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import type { Route } from './+types/timers';
 import { Header } from '../components/Header';
 import CreateTimerButton from '../components/CreateTimerButton';
-import { useTimer } from '../hooks/useTimer';
 import { getTimers } from '../utils/storage';
 import type TimerData from '../interfaces/TimerData';
 import TimerList from '../components/TimerList';
@@ -15,40 +14,16 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-
 export default function Timers() {
   const [savedTimers, setSavedTimers] = useState<TimerData[]>([]);
-  const { 
-    activeTimers, 
-    startTimer, 
-    stopTimer, 
-    pauseTimer, 
-    resumeTimer
-  } = useTimer();
 
   useEffect(() => {
     setSavedTimers(getTimers());
   }, []);
 
-  const handleStartTimer = (timer: TimerData) => {
-    startTimer(timer);
-  };
-
-  const handleStopTimer = (timerId: string) => {
-    stopTimer(timerId);
-    // Refresh saved timers to reflect any changes
+  const handleTimersUpdate = () => {
     setSavedTimers(getTimers());
   };
-
-  const handlePauseTimer = (timerId: string) => {
-    pauseTimer(timerId);
-  };
-
-  const handleResumeTimer = (timerId: string) => {
-    resumeTimer(timerId);
-  };
-
-
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -69,11 +44,7 @@ export default function Timers() {
           {/* Timer list */}
           <TimerList
             savedTimers={savedTimers}
-            activeTimers={activeTimers}
-            onStartTimer={handleStartTimer}
-            onStopTimer={handleStopTimer}
-            onPauseTimer={handlePauseTimer}
-            onResumeTimer={handleResumeTimer}
+            onTimersUpdate={handleTimersUpdate}
           />
         </div>
       </main>
