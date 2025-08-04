@@ -7,9 +7,33 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  background: linear-gradient(to bottom, #0C1D4D 0%, #214ECC 100%);
+  min-height: 100vh;
+  @apply text-white;
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+/* Override for light theme if needed */
+html.light,
+html.light body {
+  background: linear-gradient(to bottom, #0C1D4D 0%, #214ECC 100%);
+  @apply text-white;
+}
+
+/* Dark theme gradient - slightly darker version */
+html.dark,
+html.dark body {
+  background: linear-gradient(to bottom, #0A1A42 0%, #1B3FAD 100%);
+  @apply text-white;
+}
+
+/* Ensure smooth transitions for theme changes */
+*,
+*::before,
+*::after {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }

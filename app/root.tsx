@@ -8,6 +8,8 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { ThemeProvider } from "./context/ThemeContext";
+import { TimerProvider } from "./context/TimerContext";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -33,7 +35,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <ThemeProvider>
+          <TimerProvider>
+            {children}
+          </TimerProvider>
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
