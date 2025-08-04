@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useThemeJson } from '../hooks/useThemeJson';
 
 export interface ExpandableSectionProps {
   title: string;
@@ -15,7 +14,6 @@ export function ExpandableSection({
   onToggle 
 }: ExpandableSectionProps) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const { colors } = useThemeJson();
 
   const handleToggle = () => {
     const newExpanded = !isExpanded;
@@ -27,8 +25,7 @@ export function ExpandableSection({
     <div className="space-y-3">
       <button
         onClick={handleToggle}
-        className="flex items-center justify-between w-full p-3 rounded-xl hover:bg-white/5 transition-colors duration-200"
-        style={{ color: colors.text.primary }}
+        className="flex items-center justify-between w-full p-3 rounded-xl hover:bg-white/5 transition-colors duration-200 text-text-primary"
       >
         <span className="font-medium">{title}</span>
         <svg

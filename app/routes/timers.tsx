@@ -21,10 +21,6 @@ export default function Timers() {
     setSavedTimers(getTimers());
   }, []);
 
-  const handleTimersUpdate = () => {
-    setSavedTimers(getTimers());
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header 
@@ -42,10 +38,7 @@ export default function Timers() {
           <ActiveTimersSummary />
 
           {/* Timer list */}
-          <TimerList
-            savedTimers={savedTimers}
-            onTimersUpdate={handleTimersUpdate}
-          />
+          <TimerList savedTimers={savedTimers} />
         </div>
       </main>
     </div>

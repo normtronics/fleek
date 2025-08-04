@@ -59,7 +59,7 @@ export default function TimerTimesheetsTab({ timer }: TimerTimesheetsTabProps) {
             
             <div className="border-t border-white/10 pt-4">
               <div className="flex items-center justify-between">
-                <div className="text-white font-mono text-5xl font-bold">
+                <div className="text-white font-mono text-5xl font-bold min-w-[12rem] text-center">
                   {displayTime}
                 </div>
                 

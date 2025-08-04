@@ -223,10 +223,10 @@ export function TimerProvider({ children }: { children: React.ReactNode }) {
       .sort((a, b) => b.startTime.getTime() - a.startTime.getTime())[0];
   }, [activeTimers]);
 
-  const hasActiveTimers = activeTimers.some(timer => timer.isRunning);
+  const hasActiveTimers = activeTimers.some(timer => timer.isRunning && !timer.isPaused);
   
   const totalActiveTime = activeTimers
-    .filter(timer => timer.isRunning)
+    .filter(timer => timer.isRunning && !timer.isPaused)
     .reduce((total, timer) => total + timer.elapsedTime, 0);
 
   const value: TimerContextType = {

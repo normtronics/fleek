@@ -6,19 +6,13 @@ import type TimerData from '../interfaces/TimerData';
 
 interface TimerListProps {
   savedTimers: TimerData[];
-  onTimersUpdate: () => void;
 }
 
 export default function TimerList({
   savedTimers,
-  onTimersUpdate,
 }: TimerListProps) {
   const { 
     activeTimers, 
-    startTimer, 
-    stopTimer, 
-    pauseTimer, 
-    resumeTimer 
   } = useTimer();
 
   // Group timers: active first, then saved
@@ -26,23 +20,8 @@ export default function TimerList({
   const inactiveTimers = savedTimers.filter(timer => !activeTimerIds.has(timer.id));
   const timerCount = savedTimers.length;
 
-  const handleStartTimer = (timer: TimerData) => {
-    startTimer(timer);
-  };
-
-  const handleStopTimer = (timerId: string) => {
-    stopTimer(timerId);
-    // Refresh saved timers to reflect any changes
-    onTimersUpdate();
-  };
-
-  const handlePauseTimer = (timerId: string) => {
-    pauseTimer(timerId);
-  };
-
-  const handleResumeTimer = (timerId: string) => {
-    resumeTimer(timerId);
-  };
+  // Listen for timer stop events to refresh saved timers
+  // This could be improved with a proper event system or context update callback
 
   return (
     <div className="space-y-3">
@@ -62,12 +41,7 @@ export default function TimerList({
             <TimerCard
               key={activeTimer.id}
               timer={activeTimer.timerData}
-              isActive={true}
               activeElapsedTime={activeTimer.elapsedTime}
-              onStart={() => handleStartTimer(activeTimer.timerData)}
-              onStop={() => handleStopTimer(activeTimer.id)}
-              onPause={() => handlePauseTimer(activeTimer.id)}
-              onResume={() => handleResumeTimer(activeTimer.id)}
             />
           ))}
 
@@ -76,11 +50,6 @@ export default function TimerList({
             <TimerCard
               key={timer.id}
               timer={timer}
-              isActive={false}
-              onStart={() => handleStartTimer(timer)}
-              onStop={() => handleStopTimer(timer.id)}
-              onPause={() => handlePauseTimer(timer.id)}
-              onResume={() => handleResumeTimer(timer.id)}
             />
           ))}
         </>

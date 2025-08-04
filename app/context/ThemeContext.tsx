@@ -36,7 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       setActualTheme(newActualTheme);
       
-      // Apply theme to document
+      // Apply theme to document for Tailwind dark mode
       const root = document.documentElement;
       root.classList.remove("light", "dark");
       root.classList.add(newActualTheme);

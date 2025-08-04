@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { useThemeJson } from '../hooks/useThemeJson';
 
 export interface DropdownOption {
   value: string;
@@ -36,7 +35,6 @@ export function Dropdown({
   );
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { colors, components } = useThemeJson();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -118,22 +116,16 @@ export function Dropdown({
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      <div
-        className="relative w-full rounded-xl transition-all duration-200 backdrop-blur-sm"
-        style={{
-          backgroundColor: components.input.background,
-          border: `1px solid ${isOpen ? components.input.borderFocus : components.input.border}`,
-          boxShadow: isOpen ? components.input.shadowFocus : components.input.shadow,
-        }}
-      >
+      <div className={`
+        relative w-full rounded-xl transition-all duration-200 backdrop-blur-sm
+        bg-surface-secondary border
+        ${isOpen ? 'border-border-focus shadow-elevation-2' : 'border-border-primary shadow-elevation-1'}
+      `}>
         {searchable ? (
           <input
             ref={inputRef}
             type="text"
-            className="w-full px-4 py-3 bg-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50 disabled:cursor-not-allowed pr-10"
-            style={{
-              color: colors.text.primary,
-            }}
+            className="w-full px-4 py-3 bg-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50 disabled:cursor-not-allowed pr-10 text-text-primary"
             placeholder={selectedOption ? selectedOption.label : placeholder}
             value={searchTerm}
             onChange={handleInputChange}
@@ -143,10 +135,11 @@ export function Dropdown({
         ) : (
           <button
             type="button"
-            className="w-full px-4 py-3 text-left bg-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50 disabled:cursor-not-allowed pr-10"
-            style={{
-              color: selectedOption ? colors.text.primary : colors.text.tertiary,
-            }}
+            className={`
+              w-full px-4 py-3 text-left bg-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-white
+              disabled:opacity-50 disabled:cursor-not-allowed pr-10
+              ${selectedOption ? 'text-text-primary' : 'text-text-tertiary'}
+            `}
             onClick={toggleDropdown}
             disabled={disabled}
           >
@@ -158,7 +151,7 @@ export function Dropdown({
         
         <button
           type="button"
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-white/10 rounded"
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 hover:bg-white/10 rounded text-text-tertiary"
           onClick={toggleDropdown}
           disabled={disabled}
         >
@@ -167,7 +160,6 @@ export function Dropdown({
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            style={{ color: colors.text.tertiary }}
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
@@ -175,16 +167,9 @@ export function Dropdown({
       </div>
 
       {isOpen && (
-        <div
-          className="absolute z-50 w-full mt-1 rounded-xl backdrop-blur-md shadow-lg max-h-60 overflow-auto"
-          style={{
-            backgroundColor: components.card.background,
-            border: `1px solid ${components.card.border}`,
-            boxShadow: components.card.shadow,
-          }}
-        >
+        <div className="absolute z-50 w-full mt-1 rounded-xl backdrop-blur-md shadow-elevation-3 max-h-60 overflow-auto bg-surface-variant border border-border-secondary">
           {filteredOptions.length === 0 && !shouldShowCreateNew ? (
-            <div className="px-4 py-3 text-center" style={{ color: colors.text.tertiary }}>
+            <div className="px-4 py-3 text-center text-text-tertiary">
               No options found
             </div>
           ) : (
@@ -193,8 +178,7 @@ export function Dropdown({
                 <button
                   key={option.value}
                   type="button"
-                  className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-150 first:rounded-t-xl"
-                  style={{ color: colors.text.primary }}
+                  className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-150 first:rounded-t-xl text-text-primary"
                   onClick={() => handleSelect(option)}
                 >
                   {option.label}
@@ -204,8 +188,7 @@ export function Dropdown({
               {shouldShowCreateNew && (
                 <button
                   type="button"
-                  className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-150 border-t border-white/10 last:rounded-b-xl"
-                  style={{ color: colors.primary['60'] }}
+                  className="w-full px-4 py-3 text-left hover:bg-white/10 transition-colors duration-150 border-t border-white/10 last:rounded-b-xl text-primary-60"
                   onClick={handleCreateNew}
                 >
                   <div className="flex items-center gap-2">

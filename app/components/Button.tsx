@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes } from 'react';
-import { useThemeJson } from '../hooks/useThemeJson';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost';
@@ -20,20 +19,25 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     disabled,
     ...props 
   }, ref) => {
-    const { getComponent, spacing } = useThemeJson();
-    const buttonStyles = getComponent(`button.${variant}`);
-
     const sizeClasses = {
-      sm: `px-3 py-2 text-sm`,
-      md: `px-6 py-3 text-base`,
-      lg: `px-8 py-4 text-lg`,
+      sm: 'px-3 py-2 text-sm',
+      md: 'px-6 py-3 text-base',
+      lg: 'px-8 py-4 text-lg',
+    };
+
+    const variantClasses = {
+      primary: 'bg-primary-60 hover:bg-primary-70 active:bg-primary-80 text-white border-primary-60 shadow-elevation-2',
+      secondary: 'bg-surface-secondary hover:bg-surface-tertiary active:bg-surface-variant text-text-primary border-border-primary shadow-elevation-1',
+      tertiary: 'bg-transparent hover:bg-surface-primary active:bg-surface-secondary text-text-primary border-border-primary',
+      ghost: 'bg-transparent hover:bg-surface-primary active:bg-surface-secondary text-text-secondary border-transparent',
     };
 
     const baseClasses = `
-      font-medium rounded-xl transition-all duration-200 backdrop-blur-sm
-      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500
+      font-medium rounded-xl transition-all duration-200 backdrop-blur-sm border
+      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white
       disabled:opacity-50 disabled:cursor-not-allowed
       ${sizeClasses[size]}
+      ${variantClasses[variant]}
       ${fullWidth ? 'w-full' : ''}
       ${className}
     `;
@@ -42,33 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={baseClasses}
-        style={{
-          backgroundColor: buttonStyles.background,
-          color: buttonStyles.text,
-          border: `1px solid ${buttonStyles.border}`,
-          boxShadow: buttonStyles.shadow,
-        }}
         disabled={disabled || loading}
-        onMouseEnter={(e) => {
-          if (!disabled && !loading) {
-            e.currentTarget.style.backgroundColor = buttonStyles.backgroundHover;
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!disabled && !loading) {
-            e.currentTarget.style.backgroundColor = buttonStyles.background;
-          }
-        }}
-        onMouseDown={(e) => {
-          if (!disabled && !loading) {
-            e.currentTarget.style.backgroundColor = buttonStyles.backgroundPressed;
-          }
-        }}
-        onMouseUp={(e) => {
-          if (!disabled && !loading) {
-            e.currentTarget.style.backgroundColor = buttonStyles.backgroundHover;
-          }
-        }}
         {...props}
       >
         {loading ? (
