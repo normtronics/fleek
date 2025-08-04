@@ -63,28 +63,28 @@ export default function TimerTimesheetsTab({ timer }: TimerTimesheetsTabProps) {
                   {displayTime}
                 </div>
                 
-                                 <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-4">
                    <button
                      onClick={handleStopTimer}
-                     className="p-4 rounded-full bg-red-500/20 hover:bg-red-500/30 transition-colors"
+                     className="p-4 rounded-full bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors"
                      title="Stop"
                    >
-                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                     <svg className="w-6 h-6 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                        <path d="M6 6h12v12H6z" />
                      </svg>
                    </button>
                    
                    <button
                      onClick={isPaused ? handleResumeTimer : handlePauseTimer}
-                     className="p-4 rounded-full bg-white hover:bg-white/90 transition-colors"
+                     className="p-4 rounded-full bg-surface-secondary border border-border-primary hover:bg-surface-tertiary transition-colors"
                      title={isPaused ? 'Resume' : 'Pause'}
                    >
                      {isPaused ? (
-                       <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                       <svg className="w-6 h-6 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                          <path d="M8 5v14l11-7z" />
                        </svg>
                      ) : (
-                       <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                       <svg className="w-6 h-6 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                        </svg>
                      )}
@@ -135,8 +135,8 @@ export default function TimerTimesheetsTab({ timer }: TimerTimesheetsTabProps) {
           <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-6 h-6 rounded-full bg-surface-secondary border border-border-primary flex items-center justify-center">
+                  <svg className="w-3 h-3 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
                   </svg>
                 </div>
@@ -155,8 +155,8 @@ export default function TimerTimesheetsTab({ timer }: TimerTimesheetsTabProps) {
           <div className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-6 h-6 rounded-full bg-surface-secondary border border-border-primary flex items-center justify-center">
+                  <svg className="w-3 h-3 text-text-primary" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
                   </svg>
                 </div>

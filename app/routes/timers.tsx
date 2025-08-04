@@ -22,10 +22,6 @@ export default function Timers() {
     setSavedTimers(getTimers());
   }, []);
 
-  const handleTimersUpdate = () => {
-    setSavedTimers(getTimers());
-  };
-
   // Show empty state when no timers exist
   if (savedTimers.length === 0) {
     return <EmptyTimersState />;
