@@ -6,6 +6,7 @@ import { getTimers } from '../utils/storage';
 import type TimerData from '../interfaces/TimerData';
 import TimerList from '../components/TimerList';
 import ActiveTimersSummary from '../components/ActiveTimersSummary';
+import EmptyTimersState from '../components/EmptyTimersState';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,10 +22,23 @@ export default function Timers() {
     setSavedTimers(getTimers());
   }, []);
 
+  const handleTimersUpdate = () => {
+    setSavedTimers(getTimers());
+  };
+
+  // Show empty state when no timers exist
+  if (savedTimers.length === 0) {
+    return <EmptyTimersState />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header 
-        title="Timesheets"
+        centerElement={
+          <h1 className="text-headline-large font-inter font-medium text-text-primary">
+            Timesheets
+          </h1>
+        }
         rightElement={
           <div className="flex items-center space-x-3">
             <CreateTimerButton variant="icon" />

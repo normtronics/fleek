@@ -31,7 +31,13 @@ export default function CreateTimer() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header title="Create Timer" />
+      <Header 
+        centerElement={
+          <h1 className="text-headline-large font-inter font-medium text-text-primary">
+            Create Timer
+          </h1>
+        }
+      />
       
       <main className="flex-1 p-4 pb-safe">
         <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto">

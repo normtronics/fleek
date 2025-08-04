@@ -3,6 +3,215 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-inter: "Inter", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  
+  /* Font Sizes */
+  --font-size-display-large: 57px;
+  --font-size-display-medium: 45px;
+  --font-size-display-small: 36px;
+  --font-size-headline-large: 32px;
+  --font-size-headline-medium: 28px;
+  --font-size-headline-small: 24px;
+  --font-size-title-large: 22px;
+  --font-size-title-medium: 16px;
+  --font-size-title-small: 14px;
+  --font-size-label-large: 14px;
+  --font-size-label-medium: 12px;
+  --font-size-label-small: 11px;
+  --font-size-body-large: 16px;
+  --font-size-body-medium: 14px;
+  --font-size-body-small: 12px;
+  
+  /* Line Heights */
+  --line-height-display-large: 64px;
+  --line-height-display-medium: 52px;
+  --line-height-display-small: 44px;
+  --line-height-headline-large: 40px;
+  --line-height-headline-medium: 36px;
+  --line-height-headline-small: 32px;
+  --line-height-title-large: 28px;
+  --line-height-title-medium: 24px;
+  --line-height-title-small: 20px;
+  --line-height-label-large: 20px;
+  --line-height-label-medium: 16px;
+  --line-height-label-small: 16px;
+  --line-height-body-large: 24px;
+  --line-height-body-medium: 20px;
+  --line-height-body-small: 16px;
+
+  /* Primary Colors */
+  --color-primary-0: #ffffff;
+  --color-primary-10: #f4f3ff;
+  --color-primary-20: #e9e6ff;
+  --color-primary-30: #d4cdff;
+  --color-primary-40: #b8a6ff;
+  --color-primary-50: #9c7eff;
+  --color-primary-60: #8056ff;
+  --color-primary-70: #6a3aff;
+  --color-primary-80: #5423e7;
+  --color-primary-90: #3e17a8;
+  --color-primary-95: #2d0f7a;
+  --color-primary-99: #1a0947;
+  --color-primary-100: #000000;
+
+  /* Secondary Colors */
+  --color-secondary-0: #ffffff;
+  --color-secondary-10: #f8f9fa;
+  --color-secondary-20: #f1f3f4;
+  --color-secondary-30: #e8eaed;
+  --color-secondary-40: #dadce0;
+  --color-secondary-50: #bdc1c6;
+  --color-secondary-60: #9aa0a6;
+  --color-secondary-70: #80868b;
+  --color-secondary-80: #5f6368;
+  --color-secondary-90: #3c4043;
+  --color-secondary-95: #202124;
+  --color-secondary-99: #111111;
+  --color-secondary-100: #000000;
+
+  /* Tertiary Colors */
+  --color-tertiary-0: #ffffff;
+  --color-tertiary-10: #fef7ff;
+  --color-tertiary-20: #fdeeff;
+  --color-tertiary-30: #f9d9ff;
+  --color-tertiary-40: #f2b6ff;
+  --color-tertiary-50: #ea8eff;
+  --color-tertiary-60: #d66aff;
+  --color-tertiary-70: #c24aff;
+  --color-tertiary-80: #a632d9;
+  --color-tertiary-90: #7b249f;
+  --color-tertiary-95: #5d1b77;
+  --color-tertiary-99: #3a1049;
+  --color-tertiary-100: #000000;
+
+  /* Error Colors */
+  --color-error-0: #ffffff;
+  --color-error-10: #fef7f7;
+  --color-error-20: #fcebeb;
+  --color-error-30: #f8d7d7;
+  --color-error-40: #f2b8b8;
+  --color-error-50: #ea8888;
+  --color-error-60: #dc5656;
+  --color-error-70: #c53030;
+  --color-error-80: #9b2c2c;
+  --color-error-90: #742a2a;
+  --color-error-95: #4a1818;
+  --color-error-99: #2d0a0a;
+  --color-error-100: #000000;
+
+  /* Neutral Colors */
+  --color-neutral-0: #ffffff;
+  --color-neutral-10: #fafafa;
+  --color-neutral-20: #f5f5f5;
+  --color-neutral-30: #eeeeee;
+  --color-neutral-40: #e0e0e0;
+  --color-neutral-50: #bdbdbd;
+  --color-neutral-60: #9e9e9e;
+  --color-neutral-70: #757575;
+  --color-neutral-80: #424242;
+  --color-neutral-90: #212121;
+  --color-neutral-95: #141414;
+  --color-neutral-99: #0a0a0a;
+  --color-neutral-100: #000000;
+
+  /* Neutral Variant Colors */
+  --color-neutral_variant-0: #ffffff;
+  --color-neutral_variant-10: #f9f9f9;
+  --color-neutral_variant-20: #f4f4f4;
+  --color-neutral_variant-30: #efefef;
+  --color-neutral_variant-40: #e4e4e4;
+  --color-neutral_variant-50: #c6c6c6;
+  --color-neutral_variant-60: #a8a8a8;
+  --color-neutral_variant-70: #8a8a8a;
+  --color-neutral_variant-80: #6c6c6c;
+  --color-neutral_variant-90: #4e4e4e;
+  --color-neutral_variant-95: #383838;
+  --color-neutral_variant-99: #1c1c1c;
+  --color-neutral_variant-100: #000000;
+
+  /* Surface Colors */
+  --color-surface-primary: rgba(255, 255, 255, 0.05);
+  --color-surface-secondary: rgba(255, 255, 255, 0.08);
+  --color-surface-tertiary: rgba(255, 255, 255, 0.12);
+  --color-surface-variant: rgba(255, 255, 255, 0.16);
+  --color-surface-inverse: rgba(0, 0, 0, 0.87);
+  --color-surface-overlay: rgba(0, 0, 0, 0.32);
+
+  /* Text Colors */
+  --color-text-primary: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.60);
+  --color-text-tertiary: rgba(255, 255, 255, 0.38);
+  --color-text-disabled: rgba(255, 255, 255, 0.12);
+  --color-text-on_primary: rgba(255, 255, 255, 1.0);
+  --color-text-on_secondary: rgba(0, 0, 0, 0.87);
+  --color-text-on_surface: rgba(255, 255, 255, 0.87);
+  --color-text-on_error: rgba(255, 255, 255, 1.0);
+  --color-text-inverse: rgba(0, 0, 0, 0.87);
+
+  /* Border Colors */
+  --color-border-primary: rgba(255, 255, 255, 0.12);
+  --color-border-secondary: rgba(255, 255, 255, 0.08);
+  --color-border-tertiary: rgba(255, 255, 255, 0.04);
+  --color-border-disabled: rgba(255, 255, 255, 0.06);
+  --color-border-focus: rgba(255, 255, 255, 0.8);
+  --color-border-error: rgba(220, 86, 86, 0.6);
+
+  /* Custom Spacing */
+  --spacing-0_5: 0.125rem;
+  --spacing-1_5: 0.375rem;
+  --spacing-2_5: 0.625rem;
+  --spacing-3_5: 0.875rem;
+  --spacing-4_5: 1.125rem;
+  --spacing-5_5: 1.375rem;
+  --spacing-6_5: 1.625rem;
+  --spacing-7_5: 1.875rem;
+  --spacing-8_5: 2.125rem;
+  --spacing-9_5: 2.375rem;
+  --spacing-10_5: 2.625rem;
+  --spacing-11_5: 2.875rem;
+  --spacing-12_5: 3.125rem;
+  --spacing-13: 3.25rem;
+  --spacing-15: 3.75rem;
+  --spacing-17: 4.25rem;
+  --spacing-18: 4.5rem;
+  --spacing-19: 4.75rem;
+  --spacing-20: 5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-28: 7rem;
+  --spacing-30: 7.5rem;
+  --spacing-32: 8rem;
+
+  /* Border Radius */
+  --radius-4xl: 2rem;
+
+  /* Backdrop Blur */
+  --blur-xs: 2px;
+
+  /* Box Shadows */
+  --shadow-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-3: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-4: 0px 2px 3px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --shadow-elevation-5: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+  --shadow-glassmorphism: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Custom Typography Classes */
+.text-display-large {
+  font-size: var(--font-size-display-large);
+  line-height: var(--line-height-display-large);
+}
+
+.text-display-medium {
+  font-size: var(--font-size-display-medium);
+  line-height: var(--line-height-display-medium);
+}
+
+.text-headline-large {
+  font-size: var(--font-size-headline-large);
+  line-height: var(--line-height-headline-large);
 }
 
 html,

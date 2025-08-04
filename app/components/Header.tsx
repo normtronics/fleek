@@ -1,18 +1,24 @@
 interface HeaderProps {
-  title: string;
+  leftElement?: React.ReactNode;
   rightElement?: React.ReactNode;
+  centerElement?: React.ReactNode;
 }
 
-export function Header({ title, rightElement }: HeaderProps) {
+export function Header({ leftElement, rightElement, centerElement }: HeaderProps) {
   return (
     <header className="p-4 backdrop-blur-md transition-all duration-200">
       <div className="flex items-center justify-between max-w-4xl mx-auto">
-        <h1 className="text-headline-large font-inter font-medium text-text-primary">
-          {title}
-        </h1>
-        {rightElement && (
-          <div>{rightElement}</div>
-        )}
+        <div className="flex items-center">
+          {leftElement}
+        </div>
+         {centerElement && (
+          <div className="flex text-center">
+            {centerElement}
+          </div>
+         )}
+        <div className="flex items-center">
+          {rightElement}
+        </div>
       </div>
     </header>
   );

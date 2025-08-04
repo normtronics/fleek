@@ -32,7 +32,7 @@ function TimerCard({
     >
       <div className="flex items-center justify-between">
         <div className="flex-1 min-w-0">
-          <div className="border-l-4 border-yellow-400 pl-4 space-y-3">
+          <div className="border-l-2 border-yellow-400 pl-4 space-y-3">
             {/* Title with star */}
             <TimerCardTitle timer={timer} task={task} />
             
