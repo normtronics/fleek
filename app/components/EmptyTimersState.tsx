@@ -7,18 +7,18 @@ export default function EmptyTimersState() {
       <div className="max-w-md w-full text-center space-y-8">
         {/* Odoo Logo Container */}
         <div className="mx-auto w-64 h-64 border-2 border-border-secondary rounded-2xl flex items-center justify-center bg-surface-primary backdrop-blur-sm">
-          <div className="text-6xl font-bold text-white tracking-wider">
-            odoo
+          <div className="text-sm font-bold text-white tracking-wider">
+            Timesheets
           </div>
         </div>
 
         {/* Text Content */}
         <div className="space-y-4">
           <h1 className="text-headline-large font-inter font-medium text-text-primary">
-            You don't have any odoo timesheets
+            You don't have any timesheets
           </h1>
           <p className="text-body-large text-text-secondary">
-            Synchronize with odoo to get started
+            Create a new timer to get started
           </p>
         </div>
 
@@ -26,7 +26,7 @@ export default function EmptyTimersState() {
         <div className="pt-8">
           <Link to="/create-timer" className="block">
             <Button 
-              variant="primary" 
+              variant="secondary" 
               size="lg" 
               className="w-full text-body-large py-4"
             >

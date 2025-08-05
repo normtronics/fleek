@@ -4,7 +4,6 @@ import createTimerData from '../utils/timer/createTimerData';
 import validateTimerInput from '../utils/timer/validateTimerInput';
 import type CreateTimerInput from '../interfaces/CreateTimerInput';
 import { saveTimer } from '../utils/storage';
-import { useTimer } from './useTimer';
 import { 
   getProjectOptions, 
   getTaskOptions,
@@ -14,7 +13,6 @@ import {
 
 export function useCreateTimerForm() {
   const navigate = useNavigate();
-  const { startTimer } = useTimer();
   
   const [formData, setFormData] = useState<CreateTimerInput>({
     project: '',
@@ -112,10 +110,7 @@ export function useCreateTimerForm() {
       const timerData = createTimerData(formData);
       saveTimer(timerData);
       
-      // Start the timer immediately
-      startTimer(timerData);
-      
-      // Navigate back to home or timer list
+      // Navigate to the timers list to see the created timer
       navigate('/');
     } catch (error) {
       console.error('Failed to create timer:', error);

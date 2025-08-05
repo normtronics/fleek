@@ -1,6 +1,8 @@
 import type { Route } from './+types/create-timer';
 
-import { Header } from '../components/Header';
+import { useNavigate } from 'react-router';
+import { useTheme } from '../hooks/useTheme';
+import Header from '../components/Header';
 import { Dropdown } from '../components/Dropdown';
 import { TextField } from '../components/TextField';
 import { Button } from '../components/Button';
@@ -109,6 +111,7 @@ export default function CreateTimer() {
           <div className="pt-6">
             <Button
               type="submit"
+              variant="secondary"
               size="lg"
               fullWidth
               loading={isSubmitting}

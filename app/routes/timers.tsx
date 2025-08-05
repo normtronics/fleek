@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import type { Route } from './+types/timers';
-import { Header } from '../components/Header';
-import CreateTimerButton from '../components/CreateTimerButton';
+import Header from '../components/Header';
 import { getTimers } from '../utils/storage';
-import type TimerData from '../interfaces/TimerData';
-import TimerList from '../components/TimerList';
 import ActiveTimersSummary from '../components/ActiveTimersSummary';
+import TimerList from '../components/TimerList';
+import CreateTimerButton from '../components/CreateTimerButton';
 import EmptyTimersState from '../components/EmptyTimersState';
+import type TimerData from '../interfaces/TimerData';
 
 export function meta({}: Route.MetaArgs) {
   return [

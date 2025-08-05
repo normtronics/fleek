@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import type { Route } from './+types/details';
-import { Header } from '../components/Header';
+import Header from '../components/Header';
 import { getTimers } from '../utils/storage';
 import type TimerData from '../interfaces/TimerData';
 import { getProjectById, getTaskById } from '../utils/projects';

@@ -41,7 +41,7 @@ export default function TimerDetailsTab({ timer }: TimerDetailsTabProps) {
       <div className="p-6 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
         <h3 className="text-white/60 text-sm font-medium mb-3">Description</h3>
         <p className="text-white text-base leading-relaxed">
-          {timer.description || 'As a user, I would like to be able to buy a subscription, this would allow me to get a discount on the products and on the second stage of diagnosis'}
+          {timer.description}
         </p>
       </div>
     </>

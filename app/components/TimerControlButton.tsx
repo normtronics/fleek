@@ -1,5 +1,6 @@
-import { useTimer } from '../hooks/useTimer';
 import type TimerData from '../interfaces/TimerData';
+import { useTimer } from '../hooks/useTimer';
+import { PlayIcon, PauseIcon } from './icons';
 
 interface TimerControlButtonProps {
   timer: TimerData;
@@ -20,6 +21,7 @@ export default function TimerControlButton({
   const activeTimer = getActiveTimer(timer.id);
   const isActive = !!activeTimer;
   const isPaused = activeTimer?.isPaused || false;
+  
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -40,19 +42,9 @@ export default function TimerControlButton({
 
   const getIcon = () => {
     if (!isActive || isPaused) {
-      // Play icon
-      return (
-        <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      );
+      return <PlayIcon className="w-5 h-5 text-black" />;
     } else {
-      // Pause icon
-      return (
-        <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-        </svg>
-      );
+      return <PauseIcon className="w-5 h-5 text-black" />;
     }
   };
 

@@ -6,3 +6,13 @@ export default interface TimerData {
   createdAt: Date;
   id: string;
 }
+
+export interface CompletedTimerSession {
+  id: string;
+  timerId: string;
+  timerData: TimerData;
+  startTime: Date;
+  endTime: Date;
+  totalTime: number; // in seconds
+  completedAt: Date;
+}

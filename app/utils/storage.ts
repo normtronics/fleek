@@ -1,67 +1,50 @@
 import type TimerData from '../interfaces/TimerData';
+import type { CompletedTimerSession } from '../interfaces/TimerData';
 
-const STORAGE_KEYS = {
-  TIMERS: 'fleek_timers',
-  FAVORITES: 'fleek_favorite_timers',
-} as const;
+const STORAGE_KEY = 'fleek_timers';
+const COMPLETED_SESSIONS_KEY = 'fleek_completed_sessions';
 
-/**
- * Saves a timer to localStorage
- */
-export function saveTimer(timer: TimerData): void {
-  try {
-    const existingTimers = getTimers();
-    const updatedTimers = [...existingTimers, timer];
-    localStorage.setItem(STORAGE_KEYS.TIMERS, JSON.stringify(updatedTimers));
-  } catch (error) {
-    console.error('Failed to save timer:', error);
-    throw new Error('Failed to save timer');
+export function saveTimer(timerData: TimerData): void {
+  const timers = getTimers();
+  const existingIndex = timers.findIndex(t => t.id === timerData.id);
+  
+  if (existingIndex >= 0) {
+    timers[existingIndex] = timerData;
+  } else {
+    timers.push(timerData);
   }
+  
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(timers));
 }
 
-/**
- * Retrieves all timers from localStorage
- */
 export function getTimers(): TimerData[] {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (!stored) return [];
+  
   try {
-    const timersJson = localStorage.getItem(STORAGE_KEYS.TIMERS);
-    if (!timersJson) return [];
-    
-    const timers = JSON.parse(timersJson);
+    const timers = JSON.parse(stored);
     return timers.map((timer: any) => ({
       ...timer,
-      createdAt: new Date(timer.createdAt),
+      createdAt: new Date(timer.createdAt)
     }));
-  } catch (error) {
-    console.error('Failed to retrieve timers:', error);
+  } catch {
     return [];
   }
 }
 
-/**
- * Deletes a timer by ID
- */
 export function deleteTimer(timerId: string): void {
-  try {
-    const existingTimers = getTimers();
-    const updatedTimers = existingTimers.filter(timer => timer.id !== timerId);
-    localStorage.setItem(STORAGE_KEYS.TIMERS, JSON.stringify(updatedTimers));
-  } catch (error) {
-    console.error('Failed to delete timer:', error);
-    throw new Error('Failed to delete timer');
-  }
+  const timers = getTimers();
+  const filtered = timers.filter(t => t.id !== timerId);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
 }
 
-/**
- * Updates a timer
- */
 export function updateTimer(updatedTimer: TimerData): void {
   try {
     const existingTimers = getTimers();
     const updatedTimers = existingTimers.map(timer => 
       timer.id === updatedTimer.id ? updatedTimer : timer
     );
-    localStorage.setItem(STORAGE_KEYS.TIMERS, JSON.stringify(updatedTimers));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTimers));
   } catch (error) {
     console.error('Failed to update timer:', error);
     throw new Error('Failed to update timer');
@@ -86,7 +69,7 @@ export function toggleTimerFavorite(timerId: string): void {
         ? { ...timer, isFavorite: !timer.isFavorite }
         : timer
     );
-    localStorage.setItem(STORAGE_KEYS.TIMERS, JSON.stringify(updatedTimers));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTimers));
   } catch (error) {
     console.error('Failed to toggle timer favorite:', error);
     throw new Error('Failed to toggle timer favorite');
@@ -98,23 +81,64 @@ export function toggleTimerFavorite(timerId: string): void {
  */
 export function clearAllTimers(): void {
   try {
-    localStorage.removeItem(STORAGE_KEYS.TIMERS);
+    localStorage.removeItem(STORAGE_KEY);
   } catch (error) {
     console.error('Failed to clear timers:', error);
     throw new Error('Failed to clear timers');
   }
+} 
+
+export function saveCompletedSession(session: CompletedTimerSession): void {
+  const sessions = getCompletedSessions();
+  
+  // Check if this session already exists by ID to prevent duplicates
+  const existingSessionById = sessions.find(s => s.id === session.id);
+  if (existingSessionById) {
+    console.warn('Attempted to save duplicate session by ID:', session.id);
+    return; // Don't save duplicate
+  }
+  
+  // Additional check: prevent multiple sessions for the same timer run
+  // (same timerId + same startTime combination)
+  const existingSessionByTimerRun = sessions.find(s => 
+    s.timerId === session.timerId && 
+    s.startTime.getTime() === session.startTime.getTime()
+  );
+  if (existingSessionByTimerRun) {
+    console.warn('Attempted to save duplicate session for same timer run:', {
+      timerId: session.timerId,
+      startTime: session.startTime.getTime(),
+      existingId: existingSessionByTimerRun.id,
+      newId: session.id
+    });
+    return; // Don't save duplicate
+  }
+  
+  sessions.push(session);
+  localStorage.setItem(COMPLETED_SESSIONS_KEY, JSON.stringify(sessions));
 }
 
-/**
- * Checks if localStorage is available
- */
-export function isStorageAvailable(): boolean {
+export function getCompletedSessions(): CompletedTimerSession[] {
+  const stored = localStorage.getItem(COMPLETED_SESSIONS_KEY);
+  if (!stored) return [];
+  
   try {
-    const test = '__storage_test__';
-    localStorage.setItem(test, test);
-    localStorage.removeItem(test);
-    return true;
+    const sessions = JSON.parse(stored);
+    return sessions.map((session: any) => ({
+      ...session,
+      startTime: new Date(session.startTime),
+      endTime: new Date(session.endTime),
+      completedAt: new Date(session.completedAt),
+      timerData: {
+        ...session.timerData,
+        createdAt: new Date(session.timerData.createdAt)
+      }
+    }));
   } catch {
-    return false;
+    return [];
   }
+}
+
+export function getCompletedSessionsForTimer(timerId: string): CompletedTimerSession[] {
+  return getCompletedSessions().filter(session => session.timerId === timerId);
 } 

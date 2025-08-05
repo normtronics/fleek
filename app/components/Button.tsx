@@ -26,8 +26,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantClasses = {
-      primary: 'bg-primary-60 hover:bg-primary-70 active:bg-primary-80 text-white border-primary-60 shadow-elevation-2',
-      secondary: 'bg-surface-secondary hover:bg-surface-tertiary active:bg-surface-variant text-text-primary border-border-primary shadow-elevation-1',
+      primary: 'bg-surface-secondary hover:bg-surface-tertiary active:bg-surface-variant text-text-primary border-border-primary',
+      secondary: 'bg-surface-secondary hover:bg-surface-tertiary active:bg-surface-variant text-text-primary border-border-primary',
       tertiary: 'bg-transparent hover:bg-surface-primary active:bg-surface-secondary text-text-primary border-border-primary',
       ghost: 'bg-transparent hover:bg-surface-primary active:bg-surface-secondary text-text-secondary border-transparent',
     };
