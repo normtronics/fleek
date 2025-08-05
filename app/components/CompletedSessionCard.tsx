@@ -1,7 +1,7 @@
 import type { CompletedTimerSession } from '../interfaces/TimerData';
 import formatDuration from '../utils/timer/formatDuration';
 import { formatDate, formatTime } from '../utils/dateTime';
-import { BriefcaseIcon } from './icons';
+import { CheckIcon } from './icons';
 import SessionDescription from './CompletedSessionDescription';
 
 interface CompletedSessionCardProps {
@@ -19,7 +19,7 @@ export default function CompletedSessionCard({ session }: CompletedSessionCardPr
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
           <div className="w-6 h-6 rounded-full bg-surface-secondary border border-border-primary flex items-center justify-center">
-            <BriefcaseIcon className="w-3 h-3 text-text-primary" />
+            <CheckIcon className="w-3 h-3 text-text-primary" />
           </div>
           <div>
             <p className="text-white/60 text-sm">
