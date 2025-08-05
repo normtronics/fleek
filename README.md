@@ -147,6 +147,9 @@ npm install
 ### Development
 
 ```bash
+# Type checking
+npm run typecheck
+
 # Start development server with HMR
 npm run dev
 ```
