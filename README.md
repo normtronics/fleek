@@ -2,6 +2,10 @@
 
 A modern, professional timer application built with React Router v7 for tracking time across projects and tasks. Features a beautiful glassmorphism UI design with comprehensive timer management capabilities.
 
+You can see the app live here: https://fleek-delta.vercel.app/
+
+There are more in-depth docs in the [Docs Folder](./docs)
+
 ## ✨ Features
 
 ### 🕐 Timer Management
@@ -196,16 +200,6 @@ docker build -t fleek-timer .
 # Run container
 docker run -p 3000:3000 fleek-timer
 ```
-
-### Supported Platforms
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-- Vercel
-- Netlify
 
 ### Environment Setup
 The application runs entirely client-side with local storage, so no additional environment variables or database setup is required.
